@@ -71,6 +71,10 @@ def lowpass_filtering_prepare_inference(dl_output):
     cutoff_freq = (
         _locate_cutoff_freq(dl_output["stft"], percentile=0.985) / 1024
     ) * 24000
+    
+    # If the audio is almost empty. Give up processing
+    if(cutoff_freq < 1000):
+        cutoff_freq = 24000
 
     order = 8
     ftype = np.random.choice(["butter", "cheby1", "ellip", "bessel"])
@@ -106,7 +110,7 @@ def mel_spectrogram_train(y):
     mel_fmax = 24000
 
     if 24000 not in mel_basis:
-        mel = librosa_mel_fn(sampling_rate, filter_length, n_mel, mel_fmin, mel_fmax)
+        mel = librosa_mel_fn(sr=sampling_rate, n_fft=filter_length, n_mels=n_mel, fmin=mel_fmin, fmax=mel_fmax)
         mel_basis[str(mel_fmax) + "_" + str(y.device)] = (
             torch.from_numpy(mel).float().to(y.device)
         )
