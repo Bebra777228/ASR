@@ -120,8 +120,8 @@ def build_model(ckpt_path=None, config=None, device=None, model_name="basic"):
         else:
             device = torch.device("cpu")
 
-    print("Loading AudioSR: %s" % model_name)
-    print("Loading model on %s" % device)
+    print("Загрузка AudioSR: %s" % model_name)
+    print("Загрузка модели на %s" % device)
 
     ckpt_path = download_checkpoint(model_name)
 
