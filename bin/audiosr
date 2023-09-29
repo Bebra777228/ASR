@@ -104,7 +104,7 @@ os.makedirs(save_path, exist_ok=True)
 audiosr = build_model(model_name=args.model_name, device=args.device)
 
 if(args.input_file_list):
-    print("Generate audio based on the text prompts in %s" % args.input_file_list)
+    print("Генерирование звука на основе текстовых подсказок в %s" % args.input_file_list)
     files_todo = read_list(args.input_file_list)
 else: 
     files_todo = [input_file]
