@@ -71,7 +71,7 @@ def make_ddim_timesteps(
     # add one to get the final alpha values right (the ones from first scale to data during sampling)
     steps_out = ddim_timesteps + 1
     if verbose:
-        print(f"Selected timesteps for ddim sampler: {steps_out}")
+        print(f"Выбранные временные интервалы для пробоотборника ddim: {steps_out}")
     return steps_out
 
 
@@ -86,11 +86,11 @@ def make_ddim_sampling_parameters(alphacums, ddim_timesteps, eta, verbose=True):
     )
     if verbose:
         print(
-            f"Selected alphas for ddim sampler: a_t: {alphas}; a_(t-1): {alphas_prev}"
+            f"Выбранные альфы для выборки ddim: a_t: {alphas}; a_(t-1): {alphas_prev}"
         )
         print(
-            f"For the chosen value of eta, which is {eta}, "
-            f"this results in the following sigma_t schedule for ddim sampler {sigmas}"
+            f"Для выбранного значения eta, которое составляет {eta}, "
+            f"В результате получается следующее расписание sigma_t для семплера ddim {sigmas}"
         )
     return sigmas, alphas, alphas_prev
 
