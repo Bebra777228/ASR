@@ -316,7 +316,7 @@ class DDPM(nn.Module):
         for k in keys:
             for ik in ignore_keys:
                 if k.startswith(ik):
-                    print("Deleting key {} from state_dict.".format(k))
+                    print("Удаление ключа {} из state_dict.".format(k))
                     del sd[k]
         missing, unexpected = (
             self.load_state_dict(sd, strict=False)
@@ -324,12 +324,12 @@ class DDPM(nn.Module):
             else self.model.load_state_dict(sd, strict=False)
         )
         print(
-            f"Restored from {path} with {len(missing)} missing and {len(unexpected)} unexpected keys"
+            f"Восстановлено из {пути} с отсутствующими {len(missing)} и неожиданными {len(unexpected)} ключами"
         )
         if len(missing) > 0:
-            print(f"Missing Keys: {missing}")
+            print(f"Отсутствующие ключи: {missing}")
         if len(unexpected) > 0:
-            print(f"Unexpected Keys: {unexpected}")
+            print(f"Неожиданные ключи: {unexpected}")
 
     def q_mean_variance(self, x_start, t):
         """
@@ -579,7 +579,7 @@ class DDPM(nn.Module):
                     require_grad_tensor = p
             total_num += 1
         print(
-            "Module: [%s] have %s trainable parameters out of %s total parameters (%.2f)"
+            "Модуль: [%s] имеет %s обучаемых параметров из %s всех параметров (%.2f)"
             % (name, requires_grad_num, total_num, requires_grad_num / total_num)
         )
         return require_grad_tensor
@@ -681,7 +681,7 @@ class LatentDiffusion(DDPM):
             )  # Add the parameter from the conditional stage
 
         if self.learn_logvar:
-            print("Diffusion model optimizing logvar")
+            print("Диффузионная модель, оптимизирующая logvar")
             params.append(self.logvar)
         opt = torch.optim.AdamW(params, lr=lr)
         # if self.use_scheduler:
@@ -725,15 +725,15 @@ class LatentDiffusion(DDPM):
         ):
             # assert self.scale_factor == 1., 'rather not use custom rescaling and std-rescaling simultaneously'
             # set rescale weight to 1./std of encodings
-            print("### USING STD-RESCALING ###")
+            print("### ИСПОЛЬЗОВАНИЕ STD-МАСШТАБИРОВАНИЯ ###")
             x = super().get_input(batch, self.first_stage_key)
             x = x.to(self.device)
             encoder_posterior = self.encode_first_stage(x)
             z = self.get_first_stage_encoding(encoder_posterior).detach()
             del self.scale_factor
             self.register_buffer("scale_factor", 1.0 / z.flatten().std())
-            print(f"setting self.scale_factor to {self.scale_factor}")
-            print("### USING STD-RESCALING ###")
+            print(f"установка self.scale_factor в значение {self.scale_factor}")
+            print("### ИСПОЛЬЗОВАНИЕ STD-МАСШТАБИРОВАНИЯ ###")
 
     def register_schedule(
         self,
