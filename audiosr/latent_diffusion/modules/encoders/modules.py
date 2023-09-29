@@ -169,7 +169,7 @@ class FlanT5HiddenState(nn.Module):
             for p in self.model.parameters():
                 p.requires_grad = False
         else:
-            print("=> The text encoder is learnable")
+            print("=> Кодировщик текста является обучаемым")
 
         self.empty_hidden_state_cfg = None
         self.device = None
@@ -599,7 +599,7 @@ class CLAPAudioEmbeddingClassifierFreev2(nn.Module):
         # If you want this conditioner to be fully conditional, set self.unconditional_prob = 0.0
         if self.model.training == True and not self.training_mode:
             print(
-                "The pretrained CLAP model should always be in eval mode. Reloading model just in case you change the parameters."
+                "Предварительно обученная модель CLAP всегда должна находиться в режиме eval. Перезагрузка модели на случай изменения параметров."
             )
             self.model, self.model_cfg = create_model(
                 self.amodel,
@@ -625,7 +625,7 @@ class CLAPAudioEmbeddingClassifierFreev2(nn.Module):
         # the 'fusion' truncate mode can be changed to 'rand_trunc' if run in unfusion mode
         if self.embed_mode == "audio":
             if not self.training:
-                print("INFO: clap model calculate the audio embedding as condition")
+                print("INFO: модель clap вычисляет вложение звука по условию")
             with torch.no_grad():
                 # assert (
                 #     self.sampling_rate == 16000
