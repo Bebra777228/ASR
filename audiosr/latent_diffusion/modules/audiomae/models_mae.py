@@ -69,7 +69,7 @@ class MaskedAutoencoderViT(nn.Module):
         # MAE encoder specifics
         if use_custom_patch:
             print(
-                f"Use custom patch_emb with patch size: {patch_size}, stride: {stride}"
+                f"Использовать пользовательский patch_emb с размером патча: {patch_size}, stride: {stride}"
             )
             self.patch_embed = PatchEmbed_new(
                 img_size=img_size,
