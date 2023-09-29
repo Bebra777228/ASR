@@ -215,9 +215,9 @@ class DDIMSampler(object):
             else np.flip(timesteps)
         )
         total_steps = timesteps if ddim_use_original_steps else timesteps.shape[0]
-        print(f"Running DDIM Sampling with {total_steps} timesteps")
+        print(f"Запуск выборки DDIM с временными шагами {total_steps}")
 
-        iterator = tqdm(time_range, desc="DDIM Sampler", total=total_steps)
+        iterator = tqdm(time_range, desc="Генерация DDIM", total=total_steps)
 
         for i, step in enumerate(iterator):
             index = total_steps - i - 1
@@ -469,7 +469,7 @@ class DDIMSampler(object):
 
         time_range = np.flip(timesteps)
         total_steps = timesteps.shape[0]
-        print(f"Running DDIM Sampling with {total_steps} timesteps")
+        print(f"Запуск выборки DDIM с временными шагами {total_steps}")
 
         iterator = tqdm(time_range, desc="Decoding image", total=total_steps)
         x_dec = x_latent
