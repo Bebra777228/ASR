@@ -187,7 +187,7 @@ def read_wav_file(filename):
     duration = waveform.size(-1) / sr
 
     if(duration > 10.24):
-        print("\033[93m {}\033[00m" .format("Warning: audio is longer than 10.24 seconds, may degrade the model performance. It's recommand to truncate your audio to 5.12 seconds before input to AudioSR to get the best performance."))
+        print("\033[93m {}\033[00m" .format("Внимание: аудио длительностью более 10,24 секунды может ухудшить работу модели. Для достижения наилучшей производительности рекомендуется обрезать аудио до 5.12 секунд перед вводом в AudioSR."))
 
     if(duration % 5.12 != 0):
         pad_duration = duration + (5.12 - duration % 5.12)
@@ -278,8 +278,8 @@ def save_wave(waveform, savepath, name="outwav", samplerate=16000):
                 fname = f"{hex(hash(fname))}.wav"
 
         path = os.path.join(savepath, fname)
-        print("\033[98m {}\033[00m" .format("Don't forget to try different seeds by setting --seed <int> so that AudioSR can have optimal performance on your hardware."))
-        print("Save audio to %s." % path)
+        print("\033[98m {}\033[00m" .format("Не забудьте попробовать различные семплы, задав параметр --seed <int>, чтобы AudioSR имел оптимальную производительность на вашем оборудовании."))
+        print("Сохранить звук в %s." % path)
         sf.write(path, waveform[i, 0], samplerate=samplerate)
 
 
