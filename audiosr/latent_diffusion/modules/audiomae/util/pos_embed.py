@@ -105,7 +105,7 @@ def interpolate_pos_embed(model, checkpoint_model):
         # class_token and dist_token are kept unchanged
         if orig_size != new_size:
             print(
-                "Position interpolate from %dx%d to %dx%d"
+                "Позиционная интерполяция от %dx%d до %dx%d"
                 % (orig_size, orig_size, new_size, new_size)
             )
             extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
@@ -138,7 +138,7 @@ def interpolate_pos_embed_img2audio(model, checkpoint_model, orig_size, new_size
         # class_token and dist_token are kept unchanged
         if orig_size != new_size:
             print(
-                "Position interpolate from %dx%d to %dx%d"
+                "Позиционная интерполяция от %dx%d до %dx%d"
                 % (orig_size[0], orig_size[1], new_size[0], new_size[1])
             )
             extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
@@ -166,7 +166,7 @@ def interpolate_pos_embed_audio(model, checkpoint_model, orig_size, new_size):
         model.pos_embed.shape[-2] - num_patches
         if orig_size != new_size:
             print(
-                "Position interpolate from %dx%d to %dx%d"
+                "Позиционная интерполяция от %dx%d до %dx%d"
                 % (orig_size[0], orig_size[1], new_size[0], new_size[1])
             )
             # extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
