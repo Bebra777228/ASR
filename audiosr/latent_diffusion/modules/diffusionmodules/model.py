@@ -941,7 +941,7 @@ class Upsampler(nn.Module):
         num_blocks = int(np.log2(out_size // in_size)) + 1
         factor_up = 1.0 + (out_size % in_size)
         print(
-            f"Построение {self.__class__.__name__} с in_size: {in_size} --> out_size {out_size} и factor {factor_up}"
+            f"Building {self.__class__.__name__} with in_size: {in_size} --> out_size {out_size} and factor {factor_up}"
         )
         self.rescaler = LatentRescaler(
             factor=factor_up,
@@ -973,7 +973,7 @@ class Resize(nn.Module):
         self.mode = mode
         if self.with_conv:
             print(
-                f"Примечание: {self.__class__.__name} использует обучаемую понижающую дискретизацию и будет игнорировать фиксированный режим {mode}."
+                f"Note: {self.__class__.__name} uses learned downsampling and will ignore the fixed {mode} mode"
             )
             raise NotImplementedError()
             assert in_channels is not None
