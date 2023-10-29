@@ -552,14 +552,14 @@ class UNetModel(nn.Module):
         if self.extra_film_condition_dim is not None:
             self.film_emb = nn.Linear(self.extra_film_condition_dim, time_embed_dim)
             print(
-                "+ Использовать дополнительное условие на канале UNet с помощью Film. Размерность дополнительного условия составляет %s. "
+                "+ Use extra condition on UNet channel using Film. Extra condition dimension is %s. "
                 % self.extra_film_condition_dim
             )
 
         if context_dim is not None and not use_spatial_transformer:
             assert (
                 use_spatial_transformer
-            ), "Дурак!!! Ты забыл использовать пространственный трансформатор для кондиционирования перекрестного внимания...."
+            ), "Fool!! You forgot to use the spatial transformer for your cross-attention conditioning..."
 
         if context_dim is not None and not isinstance(context_dim, list):
             context_dim = [context_dim]
