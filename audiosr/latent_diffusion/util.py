@@ -45,7 +45,7 @@ def get_vits_phoneme_ids_no_padding(phonemes):
 
     for symbol in clean_text:
         if symbol not in _symbol_to_id.keys():
-            print("%s не входит в словарный запас. %s" % (symbol, clean_text))
+            print("%s is not in the vocabulary. %s" % (symbol, clean_text))
             symbol = "_"
         symbol_id = _symbol_to_id[symbol]
         sequence += [symbol_id]
@@ -79,7 +79,7 @@ def log_txt_as_img(wh, xc, size=10):
         try:
             draw.text((0, 0), lines, fill="black", font=font)
         except UnicodeEncodeError:
-            print("Невозможно закодировать строку для записи в журнал. Пропуск.")
+            print("Cant encode string for logging. Skipping.")
 
         txt = np.array(txt).transpose(2, 0, 1) / 127.5 - 1.0
         txts.append(txt)
@@ -181,7 +181,7 @@ def parallel_data_prefetch(
     elif isinstance(data, abc.Iterable):
         if isinstance(data, dict):
             print(
-                f'ВНИМАНИЕ: аргумент "data", передаваемый в parallel_data_prefetch, является диктой: Используются только его значения и не учитываются ключи.'
+                f'WARNING:"data" argument passed to parallel_data_prefetch is a dict: Using only its values and disregarding keys.'
             )
             data = list(data.values())
         if target_data_type == "ndarray":
@@ -223,7 +223,7 @@ def parallel_data_prefetch(
         processes += [p]
 
     # start processes
-    print(f"Запуск предварительной выборки...")
+    print(f"Start prefetching...")
     import time
 
     start = time.time()
@@ -242,7 +242,7 @@ def parallel_data_prefetch(
                 gather_res[res[0]] = res[1]
 
     except Exception as e:
-        print("Исключение: ", e)
+        print("Exception: ", e)
         for p in processes:
             p.terminate()
 
@@ -250,7 +250,7 @@ def parallel_data_prefetch(
     finally:
         for p in processes:
             p.join()
-        print(f"Предварительная выборка завершена. [{time.time() - start} sec.]")
+        print(f"Prefetching complete. [{time.time() - start} sec.]")
 
     if target_data_type == "ndarray":
         if not isinstance(gather_res[0], np.ndarray):
