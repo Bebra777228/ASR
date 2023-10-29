@@ -249,7 +249,7 @@ def init_distributed_mode(args):
         args.rank = int(os.environ["SLURM_PROCID"])
         args.gpu = args.rank % torch.cuda.device_count()
     else:
-        print("Не использовать распределенный режим")
+        print("Not using distributed mode")
         setup_for_distributed(is_master=True)  # hack
         args.distributed = False
         return
@@ -366,7 +366,7 @@ def load_model(args, model_without_ddp, optimizer, loss_scaler):
         else:
             checkpoint = torch.load(args.resume, map_location="cpu")
         model_without_ddp.load_state_dict(checkpoint["model"])
-        print("Возобновление контрольной точки %s" % args.resume)
+        print("Resume checkpoint %s" % args.resume)
         if (
             "optimizer" in checkpoint
             and "epoch" in checkpoint
@@ -418,7 +418,7 @@ def merge_vmae_to_avmae(avmae_state_dict, vmae_ckpt):
     pos_embed = pos_embed_v[:, 1:, :]  # 1,588,768
     cls_embed = pos_embed_v[:, 0, :].unsqueeze(1)
     pos_embed = pos_embed.reshape(1, 2, 14, 14, 768).sum(dim=1)  # 1, 14, 14, 768
-    print("Позиционная интерполяция от 14,14 до 64,8")
+    print("Position interpolate from 14,14 to 64,8")
     pos_embed = pos_embed.permute(0, 3, 1, 2)  # 1, 14,14,768 -> 1,768,14,14
     pos_embed = torch.nn.functional.interpolate(
         pos_embed, size=(64, 8), mode="bicubic", align_corners=False
